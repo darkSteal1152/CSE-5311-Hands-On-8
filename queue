@@ -2,8 +2,8 @@ class Queue:
     def __init__(self, size):
         self.size = size
         self.queue = [0] * size
-        self.front = 0
-        self.rear = -1
+        self.head = 0
+        self.tail = -1
         self.count = 0
 
     def is_empty(self):
@@ -19,22 +19,22 @@ class Queue:
     def enqueue(self, value):
         if self.is_full():
             return
-        self.rear = (self.rear + 1) % self.size
-        self.queue[self.rear] = value
+        self.tail = (self.tail + 1) % self.size
+        self.queue[self.tail] = value
         self.count += 1
 
     def dequeue(self):
         if self.is_empty():
             return None
-        value = self.queue[self.front]
-        self.front = (self.front + 1) % self.size
+        value = self.queue[self.head]
+        self.head = (self.head + 1) % self.size
         self.count -= 1
         return value
 
     def display(self):
         if self.is_empty():
             return
-        index = self.front
+        index = self.head
         for _ in range(self.count):
             print(self.queue[index], end=' ')
             index = (index + 1) % self.size
